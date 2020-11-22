@@ -1,29 +1,7 @@
-<?php
-
-    require_once 'includes/koneksi.php';
-    
-    $username = $_POST['username'];
-	$password = $_POST['sandi'];
-	$nama	=$_POST['nama'];
-	$email	=$_POST['email'];
-
-	$sql = "INSERT INTO akun (username,password,nama,email,level) VALUES ('$username','$password','$nama','$email','$level')";
-
-	if($koneksi->query($sql)===TRUE){
-		echo "<h3 align=center>Registrasi Akun Anda Berhasil</h2>";
-		
-	}else{
-		echo "Terjadi Kesalahan: ".$sql."</br>".$koneksi->error;
-	}
-
-	$koneksi->close();
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klub Belajar</title>
@@ -56,12 +34,12 @@
                           <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Password</label>
                           <div class="col-sm-6">
-                              <input type="password" class="form-control" placeholder="Password" name="Password" required>
+                          <input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Minimal 6 Karakter' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required>
                           </div></div>	
                           <div class="form-group row">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Konfirmasi Password</label>
                           <div class="col-sm-6">
-                            <input type="password" class="form-control" placeholder="Konfirmasi Password" name="Kon_Password" required>
+                          <input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Masukkan Password Yang Sama' : '');" placeholder="Konfirmasi Password" required>
                         </div></div>	
                           <div class="form-group">
                               <button type="submit" class="btn btn-md btn-success btn-block" style=>Sign In</button>
@@ -72,5 +50,3 @@
                   </div>
 </body>
 </html>
-
-        
